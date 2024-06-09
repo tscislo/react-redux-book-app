@@ -2,8 +2,6 @@ import {useAppDispatch, useAppSelector} from "../../app/hooks";
 import {fetchBook, selectBook, selectStatus} from "./book-details-slice";
 import {useEffect} from "react";
 import {useParams} from "react-router";
-import {Link} from "react-router-dom";
-import {AddToBasketComponent} from "../basket/add-to-basket/add-to-basket.component";
 
 export const BookDetailsComponent = () => {
     const {id} = useParams();

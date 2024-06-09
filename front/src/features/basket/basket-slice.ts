@@ -26,6 +26,10 @@ export const createBasketSlice = createAppSlice({
         numberOfBooksInBasket: state => state.basket.reduce((acc, basketItem) => acc + basketItem.quantity, 0),
         totalPrice: state => state.basket.reduce((acc, basketItem) => acc + basketItem.quantity * basketItem.book.price, 0),
         numberOfItems: state => state.basket.length,
+        basketItemPrice: (state, id: string) => {
+            const basketItem = state.basket.find(basketItem => basketItem.id === id);
+            return basketItem ? basketItem.quantity * basketItem.book.price : 0;
+        }
     }
 });
 
@@ -38,5 +42,6 @@ export const {
     selectBasket,
     numberOfItems,
     numberOfBooksInBasket,
-    totalPrice
+    totalPrice,
+    basketItemPrice
 } = createBasketSlice.selectors;
