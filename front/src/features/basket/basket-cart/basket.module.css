@@ -1,0 +1,9 @@
+.basketCart {
+    position: absolute;
+    top: 0;
+    right: 0;
+    width: 100px;
+    height: 100px;
+    border-radius: 50px;
+    border: 2px red solid;
+}

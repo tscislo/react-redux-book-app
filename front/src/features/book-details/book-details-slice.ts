@@ -1,23 +1,24 @@
-import type {Book} from "./book";
+import {Book} from "../books/book";
 import {createAppSlice} from "../../app/createAppSlice";
 
-export interface BooksSliceState {
-    books: Book[];
+export interface BookDetailsSlice {
+    book: Book | null,
     status: "idle" | "loading" | "failed" | "loaded";
+
 }
 
-const initialState: BooksSliceState = {
-    books: [],
+export const initialState: BookDetailsSlice = {
+    book: null,
     status: "idle",
 }
 
-export const createBooksSlice = createAppSlice({
-    name: "books",
+export const createBookSlice = createAppSlice({
+    name: "book",
     initialState,
     reducers: create => ({
-        fetchBooks: create.asyncThunk(
-            async () => {
-                const response = await fetch('http://localhost:3001/api/book');
+        fetchBook: create.asyncThunk(
+            async (bookId: string) => {
+                const response = await fetch(`http://localhost:3001/api/book/${bookId}`);
                 return await response.json();
             },
             {
@@ -26,7 +27,7 @@ export const createBooksSlice = createAppSlice({
                 },
                 fulfilled: (state, action) => {
                     state.status = "loaded";
-                    state.books = action.payload.data;
+                    state.book = action.payload.data;
                 },
                 rejected: state => {
                     state.status = "failed";
@@ -35,16 +36,17 @@ export const createBooksSlice = createAppSlice({
         )
     }),
     selectors: {
-        selectAllBooks: state => state.books,
+        selectBook: state => state.book,
         selectStatus: state => state.status,
     }
 });
 
 export const {
-    selectAllBooks,
+    selectBook,
     selectStatus
-} = createBooksSlice.selectors;
+} = createBookSlice.selectors;
 
 export const {
-    fetchBooks
-} = createBooksSlice.actions;
+    fetchBook
+} = createBookSlice.actions;
+
