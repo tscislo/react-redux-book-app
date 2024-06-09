@@ -1,6 +1,7 @@
 import {useAppSelector} from "../../../app/hooks";
 import {numberOfBooksInBasket, selectBasket} from "../basket-slice";
 import {BasketItemComponent} from "./basket-item.component";
+import {Link} from "react-router-dom";
 
 export const BasketComponent = () => {
     const basket = useAppSelector(selectBasket);
@@ -20,6 +21,7 @@ export const BasketComponent = () => {
             <h1>Koszyk</h1>
             <p>Wszystkich książek w koszyku: {books}</p>
             {basket.map(item => <BasketItemComponent key={item.id} item={item}/>)}
+            <Link to={"/order"}>Zamów</Link>
         </>
     )
 }
