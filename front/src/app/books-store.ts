@@ -6,6 +6,11 @@ import {createBookSlice} from "../features/book-details/book-details-slice";
 const rootReducer = combineSlices(createBooksSlice, createBasketSlice, createBookSlice);
 export type BooksRootState = ReturnType<typeof rootReducer>
 
-export const booksStore = configureStore({
-    reducer: rootReducer,
-})
+export const setupStore = (preloadedState?: Partial<BooksRootState>) => {
+    return configureStore({
+        reducer: rootReducer,
+        preloadedState
+    })
+}
+
+export type AppStore = ReturnType<typeof setupStore>

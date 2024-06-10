@@ -7,10 +7,10 @@ export const BasketComponent = () => {
     const basket = useAppSelector(selectBasket);
     const books = useAppSelector(numberOfBooksInBasket);
 
-    if(basket.length === 0) {
+    if (basket.length === 0) {
         return (
             <>
-                <h1>Koszyk</h1>
+                <h1 data-testid="basket-header">Koszyk</h1>
                 <p>Koszyk jest pusty!</p>
             </>
         )
