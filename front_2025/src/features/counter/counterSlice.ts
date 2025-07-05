@@ -27,9 +27,9 @@ export const counterSlice = createAppSlice({
       // immutable state based off those changes
       state.value += 1
     }),
-    decrement: (state) => {
-      state.value -= 4
-    },
+    decrement: create.reducer(state => {
+      state.value -= 1
+    }),
     // Use the `PayloadAction` type to declare the contents of `action.payload`
     incrementByAmount: create.reducer(
       (state, action: PayloadAction<number>) => {

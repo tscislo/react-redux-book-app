@@ -10,8 +10,10 @@ export const BookDetailsComponent = () => {
     const dispatch = useAppDispatch();
 
     useEffect(() => {
-        dispatch(fetchBook(id as string))
-    }, []);
+        const controller = new AbortController();
+        dispatch(fetchBook({bookId: id, controller}));
+        return () => controller.abort("Hook teardown logic!");
+    }, [dispatch, id]);
 
     return (
         <div>

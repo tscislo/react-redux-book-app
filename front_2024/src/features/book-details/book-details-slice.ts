@@ -17,8 +17,11 @@ export const createBookSlice = createAppSlice({
     initialState,
     reducers: create => ({
         fetchBook: create.asyncThunk(
-            async (bookId: string) => {
-                const response = await fetch(`http://localhost:3001/api/book/${bookId}`);
+            async ({bookId, controller} : {bookId: string | undefined, controller: AbortController}) => {
+                if (!bookId) {
+                    return Promise.reject("Book not found");
+                }
+                const response = await fetch(`http://localhost:3001/api/book/${bookId}`, {signal: controller.signal});
                 return await response.json();
             },
             {
