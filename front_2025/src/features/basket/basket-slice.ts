@@ -28,6 +28,9 @@ export const basketSlice = createAppSlice({
         basketItem => basketItem.id !== action.payload,
       )
     }),
+    clearBasket: create.reducer((state) => {
+      state.products = [];
+    }),
   }),
   selectors: {
     selectBasket: state => state.products,
@@ -46,7 +49,7 @@ export const basketSlice = createAppSlice({
   },
 })
 
-export const { addToBasket, removeFromBasket } = basketSlice.actions
+export const { addToBasket, removeFromBasket, clearBasket } = basketSlice.actions
 
 export const {
   selectBasket,
