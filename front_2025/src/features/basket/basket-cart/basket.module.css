@@ -1,0 +1,11 @@
+.basketCart {
+    display: block;
+    position: fixed;
+    top: 10px;
+    right: 10px;
+    width: 100px;
+    height: 100px;
+    border-radius: 50px;
+    border: 2px red solid;
+    background: white;
+}

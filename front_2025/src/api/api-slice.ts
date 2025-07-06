@@ -1,5 +1,6 @@
 // Need to use the React-specific entry point to import `createApi`
 import { createApi, fetchBaseQuery } from "@reduxjs/toolkit/query/react"
+import type { Order, OrderPlaced } from "../features/order/order.ts"
 
 export type Book = {
   id: number
@@ -12,8 +13,8 @@ export type Book = {
 }
 
 type BooksApiResponse = Book[];
-
 type BookApiResponse = Book;
+type PlaceOrderApiResponse = Order;
 
 // Define a service using a base URL and expected endpoints
 export const apiSlice = createApi({
@@ -29,7 +30,15 @@ export const apiSlice = createApi({
       query: id => `book/${id}`,
       transformResponse: (response: {data: Book}) => response.data
     }),
+    placeOrder: build.mutation<PlaceOrderApiResponse, OrderPlaced>({
+      query: order => ({
+        url: `order`,
+        method: 'POST',
+        body: order,
+      }),
+      transformResponse: (response: {data: Order}) => response.data
+    })
   }),
 })
 
-export const { useGetBooksQuery, useGetBookQuery } = apiSlice
+export const { useGetBooksQuery, useGetBookQuery, usePlaceOrderMutation } = apiSlice
